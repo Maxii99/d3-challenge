@@ -3,6 +3,27 @@
 var chosenXAxis = "poverty";
 var chosenYAxis = "healthcare";
 
+function makeResponsive() {
+    // Select div by id.
+    var svgArea = d3.select("#scatter").select("svg");
+    // Clear SVG area if it isn't empty.
+    if (!svgArea.empty()) {
+        svgArea.remove();
+    }
+    //SVG params.
+    var svgHeight = window.innerHeight/1.2;
+    var svgWidth = window.innerWidth/1.7;
+    // Margins.
+    var margin = {
+        top: 50,
+        right: 50,
+        bottom: 100,
+        left: 80
+    };
+    // Chart area minus margins.
+    var chartHeight = svgHeight - margin.top - margin.bottom;
+    var chartWidth = svgWidth - margin.left - margin.right;
+
 // Create a function for updating x-scale var upon click.
 function xScale(data, chosenXAxis, chartWidth) {
     var xLinearScale = d3.scaleLinear()
@@ -102,26 +123,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
         });
     return circlesGroup;
 }
-function makeResponsive() {
-    // Select div by id.
-    var svgArea = d3.select("#scatter").select("svg");
-    // Clear SVG.
-    if (!svgArea.empty()) {
-        svgArea.remove();
-    }
-    //SVG params.
-    var svgHeight = window.innerHeight/1.2;
-    var svgWidth = window.innerWidth/1.7;
-    // Margins.
-    var margin = {
-        top: 50,
-        right: 50,
-        bottom: 100,
-        left: 80
-    };
-    // Chart area minus margins.
-    var chartHeight = svgHeight - margin.top - margin.bottom;
-    var chartWidth = svgWidth - margin.left - margin.right;
+
     // Create an SVG wrapper, append an SVG group that will hold our chart,
     // and shift the latter by left and top margins.
     var svg = d3
@@ -319,6 +321,7 @@ function makeResponsive() {
         console.log(err);
     });
 }
-// Create even listener for resized window
+// Create even listener for resized window. 
+// When the browser window is resized, makeResponsive() is called.
 makeResponsive();
 d3.select(window).on("resize", makeResponsive);
