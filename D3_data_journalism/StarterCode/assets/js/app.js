@@ -269,11 +269,10 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
                         .classed("active", true)
                         .classed("inactive", false);
                 }
-                // Update circles with new x values.
+                // Update circles with new x values and text.
+                // Update tool tip with new information
                 circle = renderCircles(circlesGroup, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
-                // Update tool tips with new info.
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circle, circleText);
-                // Update circles text with new values.
                 circleText = renderText(circleText, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
             });
         // Y Labels event listener.
@@ -283,9 +282,8 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
                 chosenYAxis = d3.select(this).attr("value");
                 // Update yLinearScale.
                 yLinearScale = yScale(demoData, chosenYAxis, chartHeight);
-                // Update yAxis.
+                // Render yAxis.
                 yAxis = renderYAxes(yLinearScale, yAxis);
-                // Changes classes to change bold text.
                 if (chosenYAxis === "healthcare") {
                     healthcareLabel
                         .classed("active", true)
@@ -317,7 +315,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
                         .classed("active", true)
                         .classed("inactive", false);
                 }
-                // Update circles and too tips.
+                // Update circles and tool tips.
                 circle = renderCircles(circlesGroup, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
                 circleText = renderText(circleText, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circle, circleText);
@@ -327,6 +325,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
     });
 }
 // Create even listener for resized window. 
-// When the browser window is resized, makeResponsive() is called.
+// When the browser loads, makeResponsive() is called.
 makeResponsive();
+// When the browser window is resized, responsify() is called.
 d3.select(window).on("resize", makeResponsive);
