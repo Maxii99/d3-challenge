@@ -310,18 +310,15 @@ function makeResponsive() {
                         .classed("active", true)
                         .classed("inactive", false);
                 }
-                // Update circles with new y values.
+                // Update circles and too tips.
                 circle = renderCircles(circlesGroup, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
-                // Update circles text with new values.
                 circleText = renderText(circleText, xLinearScale, yLinearScale, chosenXAxis, chosenYAxis);
-                // Update tool tips with new info.
                 circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circle, circleText);
             });
     }).catch(function(err) {
         console.log(err);
     });
 }
+// Create even listener for resized window
 makeResponsive();
-// Event listener for window resize.
-// When the browser window is resized, makeResponsive() is called.
 d3.select(window).on("resize", makeResponsive);
