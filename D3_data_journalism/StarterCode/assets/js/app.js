@@ -32,7 +32,7 @@ function xScale(data, chosenXAxis, chartWidth) {
         .range([0, chartWidth]);
     return xLinearScale;
 }
-// Create a function that updates xAxis var upon click on x-axis label.
+// Create a function that updates xAxis var upon click.
 function renderXAxes(newXScale, xAxis) {
     var bottomAxis = d3.axisBottom(newXScale);
     xAxis.transition()
@@ -40,7 +40,7 @@ function renderXAxes(newXScale, xAxis) {
         .call(bottomAxis);
     return xAxis;
 }
-// Create a function for updating y-scale var upon click.
+// Create a function that updates y-scale var upon click.
 function yScale(data, chosenYAxis, chartHeight) {
     var yLinearScale = d3.scaleLinear()
         .domain([d3.min(data, d => d[chosenYAxis]) * .8,
@@ -124,8 +124,7 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
     return circlesGroup;
 }
 
-    // Create an SVG wrapper, append an SVG group that will hold our chart,
-    // and shift the latter by left and top margins.
+    // Create an SVG container and shift the latter by left and top margins.
     var svg = d3
     .select("#scatter")
     .append("svg")
@@ -145,17 +144,17 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
             data.income = +data.income;
             data.obesity = data.obesity;
         });
-        // Create x/y linear scales.
+        // Create x and y linear scales.
         var xLinearScale = xScale(demoData, chosenXAxis, chartWidth);
         var yLinearScale = yScale(demoData, chosenYAxis, chartHeight);
-        // Create initial axis functions.
+        // Create default axis functions.
         var bottomAxis =d3.axisBottom(xLinearScale);
         var leftAxis = d3.axisLeft(yLinearScale);
-        // Append x axis.
+        // Set x axis to bottom of chart.
         var xAxis = chartGroup.append("g")
             .attr("transform", `translate(0, ${chartHeight})`)
             .call(bottomAxis);
-        // Append y axis.
+        // Set axis to left of chart.
         var yAxis = chartGroup.append("g")
             .call(leftAxis);
         // Set data used for circles.
