@@ -175,30 +175,33 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
             .attr("dy", ".35em") 
             .text(d => d.abbr)
             .classed("stateText", true);
-        // Update tool tip function above csv import.
+        // Update tool tip function.
         var circlesGroup = updateToolTip(chosenXAxis, chosenYAxis, circle, circleText);
-        // Add x label groups and labels.
+        // Add x and y label groups and labels
+
+        // First, add x label groups and labels.
         var xLabelsGroup = chartGroup.append("g")
             .attr("transform", `translate(${chartWidth / 2}, ${chartHeight + 20})`);
         var povertyLabel = xLabelsGroup.append("text")
             .attr("x", 0)
             .attr("y", 20)
-            .attr("value", "poverty") // value to grab for event listener
+            .attr("value", "poverty")
             .classed("active", true)
             .text("In Poverty (%)");
         var ageLabel = xLabelsGroup.append("text")
             .attr("x", 0)
             .attr("y", 40)
-            .attr("value", "age") // value to grab for event listener
+            .attr("value", "age") 
             .classed("inactive", true)
             .text("Age (Median)");
         var incomeLabel = xLabelsGroup.append("text")
             .attr("x", 0)
             .attr("y", 60)
-            .attr("value", "income") // value to grab for event listener
+            .attr("value", "income") 
             .classed("inactive", true)
             .text("Household Income (Median)");
-        // Add y labels group and labels.
+        
+            // Now add y labels group and labels.
         var yLabelsGroup = chartGroup.append("g")
             .attr("transform", "rotate(-90)");
         var healthcareLabel = yLabelsGroup.append("text")
@@ -222,7 +225,10 @@ function updateToolTip(chosenXAxis, chosenYAxis, circlesGroup, textGroup) {
             .attr("value", "obesity")
             .classed("inactive", true)
             .text("Obese (%)");
-        // X labels event listener.
+        
+            // Event listeners with labels
+
+            // X labels event listener.
         xLabelsGroup.selectAll("text")
             .on("click", function() {
                 // Grab selected label.
